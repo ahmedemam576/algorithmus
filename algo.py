@@ -22,4 +22,4 @@ def same_tree(p,q):
 	if  not p or not q or p.data != q.data:
 		return False
 	return same_tree(p.right, q.right)and (p.left, q.left
-)
+
