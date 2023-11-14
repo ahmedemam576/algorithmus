@@ -9,7 +9,6 @@
 
 from ds_v1.BinaryTree.BinaryTree import TreeNode
 
-
 def find_max_depth(root):
         if not root:
             return 0
