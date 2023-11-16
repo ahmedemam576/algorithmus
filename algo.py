@@ -22,3 +22,22 @@ def same_tree(p,q):
 		return False
 	return same_tree(p.right, q.right) and (p.left, q.left)
 
+## Binary tree level order  traversal
+class solution:
+	def levelOrder(self, root:[TreeNode])->List:
+		q = collections.deque()
+		res =[]
+		q.append(root)
+		while q:
+			level =[]
+			level_len = len(q)
+			for lvl in level_len:
+				node =q.popleft()
+				if node :
+					level.append(node.val)
+					q.append(node.left)
+					q.appned(node.right)
+			res.append(level)
+		return res
+				
+			
