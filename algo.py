@@ -50,5 +50,19 @@ class Solution:
                 cur = cur.left
             else:
                 return cur
-				
+###### the Kth smallest element in a BST
+class Solution:
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+        n=0 
+        stack = []
+        pointer = root
+        while pointer or stack:
+            while pointer:
+                stack.append(pointer)
+                pointer = pointer.left
+            pointer = stack.pop()
+            n+=1
+            if n== k:
+                return pointer.val
+            pointer = pointer.right
 			
