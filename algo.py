@@ -65,4 +65,44 @@ class Solution:
             if n== k:
                 return pointer.val
             pointer = pointer.right
+
+#####serialize and deserialize binary tree with recursion
+
+class Codec:
+
+    def serialize(self, root):
+        """Encodes a tree to a single string.
+        
+        :type root: TreeNode
+        :rtype: str
+        """
+        ans = []
+        def dfs(root):
+            if not root:
+                ans.append("N")
+                return
+            ans.append(str(root.val))
+            dfs(root.left)
+            dfs(root.right)
+        dfs(root)
+        return ",".join(ans)
+
+    def deserialize(self, data):
+        """Decodes your encoded data to tree.
+        
+        :type data: str
+        :rtype: TreeNode
+        """
+        self.i=0
+        values = data.split(",")
+        def dfs():
+            if values[self.i]=="N":
+                self.i +=1
+                return None
+            root = TreeNode(int(values[self.i]))
+            self.i +=1
+            root.left =dfs()
+            root.right =dfs()
+            return root
+        return dfs()
 			
