@@ -128,4 +128,40 @@ class Solution:
             # next of root index till last index
             root.right = self.buildTree(preorder, inorder[index+1:])
             return root
+
+## implement a Trie
+class Node:
+    def __init__(self):
+        self.children = {}
+        self.EndofWord= False
+class Trie:
+
+    def __init__(self):
+        self.root = Node()
+
+    def insert(self, word: str) -> None:
+        cur =self.root
+        for c in word:
+            if c not in cur.children:
+                cur.children[c]=Node()
+            cur = cur.children[c]
+        cur.EndofWord =True
+        
+
+    def search(self, word: str) -> bool:
+        cur= self.root
+        for c in word:
+            if c not in cur.children :
+                return False
+            cur = cur.children[c]
+        return cur.EndofWord
+        
+
+    def startsWith(self, prefix: str) -> bool:
+        cur = self.root
+        for c in prefix:
+            if c not in cur.children:
+                return False
+            cur = cur.children[c]
+        return True
 			
