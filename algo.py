@@ -164,4 +164,28 @@ class Trie:
                 return False
             cur = cur.children[c]
         return True
-			
+
+## course schedule , detect cycle in a graph
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        prelist = {}
+        for crs in range(numCourses):
+            prelist[crs]= []
+        for crs, pre in prerequisites:
+            prelist[crs].append(pre)
+        visitset = set()
+        def dfs(crs):
+            if crs in visitset:
+                return False
+            if prelist[crs]==[]:
+                return True
+            visitset.add(crs)
+            for pre in prelist[crs]:
+                if not dfs(pre):
+                    return False
+            visitset.remove(crs) # if we remove this it will always produce false
+            prelist[crs]=[] #if we removed this it will take too much time
+            return True
+        for crs in range(numCourses):
+            if not dfs(crs):return False
+        return True
