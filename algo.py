@@ -262,4 +262,14 @@ class Solution:
             dfs(avisit, rows-1, c)
         # the intersection of 2 lists are the position where water can flow from pacific to the atlantic
         return list(pvisit.intersection(avisit))
+#climbing stairs # dynamic programing
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        one = 1
+        two  = 1
+        for i in range(n-1):
+            tmp = one
+            one = one+two
+            two = tmp
+        return one
 
