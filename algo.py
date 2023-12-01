@@ -237,4 +237,29 @@ class Solution:
                     islands +=1
         return islands
         
+#pacific atlantic ocean (graph)
+class Solution:
+    def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
+        if not heights:
+            return []
+        rows, cols = len(heights), len(heights[0])
+        pvisit = set()
+        avisit = set()
+        directions = [(-1,0),(1,0),(0,-1),(0,1)]
+        def dfs(visited, x,y):
+            visited.add((x,y))
+            for dx, dy in directions:
+                newx, newy = x+dx, y+dy
+                if 0 <= newx< rows and 0<=newy<cols and (newx, newy) not in visited and heights[newx][newy]>=heights[x][y]:
+                    dfs(visited, newx,newy)
+        for r in range(rows):
+            #left and right border
+            dfs(pvisit, r,0)
+            dfs(avisit,r, cols-1 )
+        for c in range(cols):
+            # top and bottom borders
+            dfs(pvisit, 0, c)
+            dfs(avisit, rows-1, c)
+        # the intersection of 2 lists are the position where water can flow from pacific to the atlantic
+        return list(pvisit.intersection(avisit))
 
